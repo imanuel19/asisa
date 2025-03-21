@@ -8,6 +8,9 @@ export const metadata = {
   robots: config.config.search_robots,
 }
 
+export const viewport = {
+  themeColor: "#000000", // Moved theme color to viewport export
+}
 // Set cache control headers using the revalidate property
 export const revalidate = 86400 // 24 hours in seconds
 
