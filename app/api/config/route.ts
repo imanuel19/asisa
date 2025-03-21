@@ -1,5 +1,6 @@
 import { type NextRequest, NextResponse } from "next/server"
-import { put } from "@vercel/blob"
+import fs from "fs"
+import path from "path"
 import config from "@/config/default/config"
 
 export async function GET() {
@@ -17,16 +18,18 @@ export async function POST(request: NextRequest) {
     // Convert to JSON string with pretty formatting
     const configJson = JSON.stringify(updatedConfig, null, 2)
 
-    // Save to Vercel Blob
-    const blob = await put("config.json", configJson, {
-      contentType: "application/json",
-      access: "public",
-    })
+    // Define the path to the config file
+    const configFilePath = path.join(process.cwd(), "config", "config.json")
 
-    return NextResponse.json({ success: true, url: blob.url })
+    // Ensure the config directory exists
+    fs.mkdirSync(path.dirname(configFilePath), { recursive: true })
+
+    // Save to local file system
+    fs.writeFileSync(configFilePath, configJson, "utf8")
+
+    return NextResponse.json({ success: true, message: "Config saved successfully" })
   } catch (error) {
     console.error("Error saving config:", error)
     return NextResponse.json({ error: "Failed to save configuration", details: String(error) }, { status: 500 })
   }
 }
-
