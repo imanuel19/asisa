@@ -1,11 +1,11 @@
-import ClientPage from "./ClientPage"
-import config from "@/config/default/config"
+import ClientPage from "./ClientPage";
+import * as config from "./api/config/default/config"; // Updated to use named imports
 
 // Server component for metadata
 export const metadata = {
-  title: config.home_title,
-  description: config.home_description,
-  robots: config.home_robots,
+  title: config.config.search_title,
+  description: config.config.search_description,
+  robots: config.config.search_robots,
 }
 
 // Set cache control headers using the revalidate property
@@ -14,4 +14,3 @@ export const revalidate = 86400 // 24 hours in seconds
 export default function Home() {
   return <ClientPage />
 }
-
