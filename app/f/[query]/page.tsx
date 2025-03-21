@@ -1,8 +1,8 @@
 import { Music } from "lucide-react"
-import config from "@/config/default/config"
-import { searchSongs } from "@/lib/data"
+import { config } from '../../api/config/default/config'
+import { searchSongs } from '../../lib/data'
 import type { Metadata } from "next"
-import FloatingMenu from "@/components/FloatingMenu"
+import FloatingMenu from '../../components/FloatingMenu'
 import SearchResults from "./SearchResults"
 
 type Props = {
@@ -50,4 +50,3 @@ export default async function SearchPage({ params }: Props) {
     </div>
   )
 }
-
